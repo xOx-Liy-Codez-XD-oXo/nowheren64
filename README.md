@@ -1,5 +1,5 @@
 # nowhere to go for the n64
-a short music video thing !! doesnt render fullspeed on hardware yet
+a short music video thing
 
 <img width="640" height="557" alt="n64togoscreenie" src="https://github.com/user-attachments/assets/823c1345-a106-422a-982f-f11126780669" />
 
