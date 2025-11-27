@@ -271,11 +271,11 @@ void drawFrame() {
 	gl_context_end();
 
 	if(frame > 1537 && frame < 1689) {
-		rdpq_paragraph_render(par2, 240.0f, 100.0f);
-		rdpq_paragraph_render(par1, 230.0f, 80.0f);
+		rdpq_paragraph_render(par2, 120.0f, 100.0f);
+		rdpq_paragraph_render(par1, 115.0f, 80.0f);
 	}
 	if(frame > 1688 && frame < 1850) {
-		rdpq_paragraph_render(par3, 110.0f, 70.0f);
+		rdpq_paragraph_render(par3, 52.0f, 70.0f);
 	}
 
 	float cputimems = ticksToMs(timer_ticks() - starttime);
@@ -299,9 +299,9 @@ void drawFrame() {
 }
 
 int main() {
-	resolution_t lilyres = {640, 240, true};
+	resolution_t lilyres = {320, 240, true};
 
-	display_init(lilyres, DEPTH_16_BPP, 3, GAMMA_NONE, FILTERS_DEDITHER );
+	display_init(lilyres, DEPTH_16_BPP, 3, GAMMA_NONE, FILTERS_DISABLED );
 	
 	rdpq_init();
 	gl_init();
@@ -335,7 +335,7 @@ int main() {
         }, 2, "juno, Jane Remover", &thenumbernineteen);
 	int thenumbertwentythree = 23;
 	par3 = rdpq_paragraph_build(&(rdpq_textparms_t){
-		.width = 500,
+		.width = 250,
 		.wrap = WRAP_WORD,
         	.align = ALIGN_CENTER,
         	.valign = VALIGN_CENTER,
@@ -360,4 +360,5 @@ int main() {
 	}
 
 	return 0;
+
 }
