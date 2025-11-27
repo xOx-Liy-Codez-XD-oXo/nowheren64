@@ -9,6 +9,7 @@ $(BUILD_DIR)/nowhere.dfs:
 $(BUILD_DIR)/nowhere.elf: $(src:%.c=$(BUILD_DIR)/%.o)
 
 nowhere.z64: N64_ROM_TITLE="nowhere to go"
+nowhere.z64: N64_ROM_ELFCOMPRESS="3"
 nowhere.z64: $(BUILD_DIR)/nowhere.dfs
 
 clean:
