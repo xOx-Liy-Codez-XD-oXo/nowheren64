@@ -61,6 +61,7 @@ unsigned char frameadvance = 1;
 int frame = 0;
 int rframe = 0;
 int dbgval = 0;
+float accumulatedbehindtime = 0.0f;
 
 rdpq_paragraph_t* par1;
 rdpq_paragraph_t* par2;
@@ -104,7 +105,7 @@ void drawFrame() {
 	                   cameraAnim[(frame12) + 4], cameraAnim[(frame12) + 5], cameraAnim[(frame12) + 6], cameraAnim[(frame12) + 7],
 	                   cameraAnim[(frame12) + 8], cameraAnim[(frame12) + 9], cameraAnim[(frame12) + 10], cameraAnim[(frame12) + 11],
 	                   0.0f, 0.0f, 0.0f, 1.0f);
-	mat4_t model, modelview, model2, mrx, mry, mrz, persp;
+	mat4_t model, modelview, model2, persp;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	persp = m4_perspective(cameraFovAnim[frame] * 1.6f, 1.333f, 0.5f, 30.0f);
@@ -282,19 +283,29 @@ void drawFrame() {
 
 	if(dbgval) {
 		rdpq_set_mode_fill(RGBA32(0, 0, 0, 255));
-        	rdpq_fill_rectangle(0, 0, 100, 30);
+        	rdpq_fill_rectangle(20, 20, 130, 70);
 	}
 	rdpq_detach_wait();
 	float frametimems = ticksToMs(timer_ticks() - starttime);
+	float deltatime = display_get_delta_time() * 1000.0f;
 	if(dbgval) {
 		char timedisplay[100];
-		snprintf(timedisplay, 100, "%.1f fps\n%.1f ms cpu\n%.1f ms gpu", display_get_fps(), cputimems, frametimems);
-		graphics_draw_text(disp, 12, 4, timedisplay);
+		snprintf(timedisplay, 100, "%.1f fps\n%.1f ms cpu\n%.1f ms gpu\n%.1f ms total", display_get_fps(), cputimems, frametimems, deltatime);
+		graphics_draw_text(disp, 28, 24, timedisplay);
 	}
 	display_show(disp);
 
 	if(frame > 1930) frameadvance = 0;
-	if(frameadvance) frame++;
+	if(frameadvance) {
+		frame++;
+		if(deltatime > 16.666667f) {
+			accumulatedbehindtime += deltatime - 16.666667f;
+			if(accumulatedbehindtime > 16.666667f) {
+				frame++;
+				accumulatedbehindtime -= 16.666667f;
+			}
+		}
+	}
 	rframe++;
 }
 
@@ -349,6 +360,8 @@ int main() {
 	initDraw();
 
 	//rspq_profile_start();
+
+	display_set_fps_limit(60.0f);
 
 	while(1) {
 		joypad_poll();
