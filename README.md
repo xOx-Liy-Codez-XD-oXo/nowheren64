@@ -6,7 +6,7 @@ a short music video thing
 press A when the animations done to replay it and press B to bring up some numbers
 
 ## building
-you need libdragon. typing make in the repo directory is ok.
+you need libdragon's preview branch. typing make in the repo directory is ok.
 
 ## licenses
 math_3d.h is licensed under the MIT license so heres a copy of that
