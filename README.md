@@ -3,7 +3,7 @@ a short music video thing
 
 <img width="640" height="557" alt="n64togoscreenie" src="https://github.com/user-attachments/assets/823c1345-a106-422a-982f-f11126780669" />
 
-press A when the animations done to replay it and press B to bring up some numbers
+press A when the animations done to replay it
 
 ## building
 you need libdragon's preview branch. typing make in the repo directory is ok.
