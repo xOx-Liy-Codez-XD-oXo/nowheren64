@@ -367,7 +367,7 @@ int main() {
 		joypad_poll();
 		joypad_buttons_t btns = joypad_get_buttons_pressed(0);
 		if(btns.a && frameadvance == 0) { frame = 0; frameadvance = 1; mixer_ch_stop(0); wav64_play(&song, 0); }
-		if(btns.b) dbgval ^= 1;
+		//if(btns.b) dbgval ^= 1;
 		drawFrame();
 		mixer_try_play();
 	}
@@ -375,3 +375,4 @@ int main() {
 	return 0;
 
 }
+
